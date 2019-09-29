@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="cloud.augmentum.features.moviedetail.viewmodel.MovieDetailViewModel" />
+
+        <import type="cloud.augmentum.R" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/movie_details_appbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:theme="@style/ThemeOverlay.MaterialComponents"
+            app:elevation="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/appbar_background"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/movie_details_back_arrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{viewModel::onBackClicked}"
+                    android:paddingStart="16dp"
+                    android:paddingTop="8dp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="8dp"
+                    android:src="@drawable/ic_arrow_back"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/movie_details_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/product_sans_medium"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:text="@{viewModel.data.title}"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toStartOf="@id/movie_details_favourite_icon"
+                    app:layout_constraintStart_toEndOf="@id/movie_details_back_arrow"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="John Wick: Chapter 3 – Parabellum" />
+
+                <TextView
+                    android:id="@+id/movie_details_tagline"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/product_sans_light"
+                    android:text="@{viewModel.data.tagline}"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toStartOf="@id/movie_details_favourite_icon"
+                    app:layout_constraintStart_toEndOf="@id/movie_details_back_arrow"
+                    app:layout_constraintTop_toBottomOf="@id/movie_details_name"
+                    tools:text="The Grace Period Is Over" />
+
+                <ImageView
+                    android:id="@+id/movie_details_favourite_icon"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:onClick="@{viewModel::onFavouriteClicked}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    bind:src="@{viewModel.favourite ? R.drawable.ic_movie_is_favourite : R.drawable.ic_movie_is_not_favourite}" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/movie_details_backdrop_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="16dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="10dp"
+            app:layout_constraintTop_toBottomOf="@id/movie_details_appbar">
+
+            <ImageView
+                android:id="@+id/movie_details_backdrop_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/movie_details_appbar"
+                bind:imageUrl="@{viewModel.data.backdropPath}"
+                tools:src="@mipmap/placeholder_backdrop" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/movie_details_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/product_sans_medium"
+            android:text="@{viewModel.data.description}"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/movie_details_backdrop_layout"
+            tools:text="Super-assassin John Wick returns with a $14 million price tag on his head and an army of bounty-hunting killers on his trail. After killing a member of the shadowy international assassin’s guild, the High Table, John Wick is excommunicado, but the world’s most ruthless hit men and women await his every turn." />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

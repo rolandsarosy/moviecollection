@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="cloud.augmentum.common.recyclerview.AdapterType" />
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="cloud.augmentum.features.catalog.viewmodel.CatalogViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/catalog_base_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/catalog_movie_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white"
+            android:overScrollMode="never"
+            bind:adapterType="@{AdapterType.STAGGERED_LAYOUT_MANAGER}"
+            bind:numberOfColumns="@{2}"
+            bind:source="@{viewModel.listItemViewModels}" />
+
+        <TextView
+            android:id="@+id/empty_state_indicator"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:fontFamily="@font/product_sans_light"
+            android:gravity="center"
+            android:text="@string/catalog_empty_state_indicator"
+            android:textSize="18sp"
+            android:visibility="@{viewModel.isListEmpty ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/catalog_appbar" />
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/catalog_appbar"
+            android:layout_width="match_parent"
+            android:layout_height="98dp"
+            android:background="@android:color/transparent"
+            android:theme="@style/ThemeOverlay.MaterialComponents"
+            app:elevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/appbar_background"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/catalog_salut"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/product_sans_light"
+                    android:text="@string/catalog_salut"
+                    android:textColor="@color/secondaryDarkColor"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/catalog_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/product_sans_medium"
+                    android:text="@string/catalog_name"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="25sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/catalog_salut" />
+
+                <TextView
+                    android:id="@+id/catalog_flavour"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="@font/product_sans_light"
+                    android:text="@string/catalog_flavour"
+                    android:textColor="@color/secondaryDarkColor"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/catalog_name" />
+
+                <ImageView
+                    android:id="@+id/catalog_favourites"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginEnd="32dp"
+                    android:onClick="@{viewModel::onFavouritesClicked}"
+                    android:src="@drawable/ic_movie_is_not_favourite"
+                    app:layout_constraintBottom_toBottomOf="@id/catalog_sort"
+                    app:layout_constraintEnd_toStartOf="@id/catalog_sort"
+                    app:layout_constraintTop_toTopOf="@id/catalog_sort" />
+
+                <ImageView
+                    android:id="@+id/catalog_sort"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:onClick="@{viewModel::onSortClicked}"
+                    android:src="@drawable/ic_sort"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.appbar.AppBarLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

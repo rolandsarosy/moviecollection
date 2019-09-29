@@ -1,0 +1,118 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion 29
+    defaultConfig {
+        applicationId "cloud.augmentum"
+        minSdkVersion 21
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "BASE_URL", "\"https://api.themoviedb.org/3/\""
+            buildConfigField "String", "API_KEY", "\"8d61230b01928fe55a53a48a41dc839b\""
+        }
+        debug {
+            buildConfigField "String", "BASE_URL", "\"https://api.themoviedb.org/3/\""
+            buildConfigField "String", "API_KEY", "\"8d61230b01928fe55a53a48a41dc839b\""
+        }
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
+}
+
+ext {
+    appCompatVersion = '1.1.0'
+    ktxCoreVersion = '1.1.0'
+    constraitLayloutVersion = '1.1.3'
+    materialVersion = '1.0.0'
+    liveDataVersion = '2.1.0'
+    cardViewVersion = '1.0.0'
+    recyclerViewVersion = '1.1.0-beta04'
+    koinVersion = '2.0.1'
+    timberVersion = '4.7.1'
+    rxJavaVersion = '2.2.10'
+    rxAndroidVersion = '2.1.1'
+    retrofitVersion = '2.6.0'
+    okhttpLoggingVersion = '4.0.0'
+    navComponentsVersion = '2.1.0'
+    roomVersion = "2.1.0"
+    glideVersion = '4.9.0'
+    pagingVersion = "2.1.0"
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "androidx.appcompat:appcompat:$appCompatVersion"
+    implementation "androidx.core:core-ktx:$ktxCoreVersion"
+    implementation "androidx.constraintlayout:constraintlayout:$constraitLayloutVersion"
+    implementation "com.google.android.material:material:$materialVersion"
+
+    // Koin dependency injection
+    implementation "org.koin:koin-android:$koinVersion"
+    implementation "org.koin:koin-androidx-viewmodel:$koinVersion"
+    implementation "org.koin:koin-androidx-scope:$koinVersion"
+
+    // Timber logger
+    implementation "com.jakewharton.timber:timber:$timberVersion"
+
+    // Lifecycle extensions
+    implementation "androidx.lifecycle:lifecycle-extensions:$liveDataVersion"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation "androidx.lifecycle:lifecycle-common-java8:$liveDataVersion"
+
+    // RxJava 2
+    implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
+    implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
+
+    // CardView and RecyclerView
+    implementation "androidx.cardview:cardview:$cardViewVersion"
+    implementation "androidx.recyclerview:recyclerview:$recyclerViewVersion"
+
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
+
+    // Okhttp 3
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttpLoggingVersion"
+
+    // Navigation components
+    implementation "androidx.navigation:navigation-fragment-ktx:$navComponentsVersion"
+    implementation "androidx.navigation:navigation-ui-ktx:$navComponentsVersion"
+
+    // Room
+    implementation "androidx.room:room-runtime:$roomVersion"
+    kapt "androidx.room:room-compiler:$roomVersion"
+    implementation "androidx.room:room-ktx:$roomVersion"
+    implementation "androidx.room:room-rxjava2:$roomVersion"
+
+    // Glide 4
+    implementation "com.github.bumptech.glide:glide:$glideVersion"
+    kapt "com.github.bumptech.glide:compiler:$glideVersion"
+
+    // Paging library
+    implementation "androidx.paging:paging-runtime-ktx:$pagingVersion"
+    implementation "androidx.paging:paging-rxjava2-ktx:$pagingVersion"
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+}

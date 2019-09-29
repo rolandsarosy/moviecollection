@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Movie Collection</string>
+    <string name="catalog_salut">Hello,</string>
+    <string name="catalog_name">VeryCreatives</string>
+    <string name="catalog_flavour">Check these movies out!</string>
+    <string name="sorting_description">In which order would you like to me to list the movies?</string>
+    <string name="sorting_popular">The hot stuff!\nShow me the most popular movies!</string>
+    <string name="sorting_top">Only the best!\nShow me the top rated movies!</string>
+    <string name="sorting_favourites">My faves! \nShow me my favourite movies!</string>
+    <string name="favourite_movies_flavour">These are your favourite movies!</string>
+    <string name="catalog_empty_state_indicator">I could not find any movies for you that matched your requirements :(</string>
+    <string name="favourites_empty_state_indicator">You don\'t have any favourite movies! C\'mon! Show some love…</string>
+</resources>
